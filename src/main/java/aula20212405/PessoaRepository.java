@@ -1,12 +1,13 @@
 package aula20212405;
 
+import java.util.List;
+
 public interface PessoaRepository {
 	void salvar(Pessoa pessoa);
 	
-	void excluir(Pessoa pessoa);
+	void excluir(Integer id);
 	
-	void atualizar(Pessoa pessoa);
+	void atualizar(Pessoa pessoa, Integer id);
 	
-	void getAll(Pessoa pessoa);
-	
+	List<Pessoa> getAll();
 }
