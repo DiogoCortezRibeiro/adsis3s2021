@@ -65,9 +65,9 @@ public class PessoaRepositoryPersistent implements PessoaRepository {
 	}
 
 	@Override
-	public void atualizar(Pessoa pessoa, Integer id) {
+	public void atualizar(Pessoa pessoa, int id) {
 		try {
-			PreparedStatement psUpdate = conexão.prepareStatement("UPDATE PESSOA SET nome = ? idade = ? WHERE id = ?");
+			PreparedStatement psUpdate = conexão.prepareStatement("UPDATE PESSOA SET NOME = ? , IDADE = ? WHERE id = ?");
 			psUpdate.setString(1, pessoa.getNome());
 			psUpdate.setInt(2, pessoa.getIdade());
 			psUpdate.setInt(3, id);

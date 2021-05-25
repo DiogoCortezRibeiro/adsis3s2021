@@ -7,7 +7,7 @@ public interface PessoaRepository {
 	
 	void excluir(Integer id);
 	
-	void atualizar(Pessoa pessoa, Integer id);
+	void atualizar(Pessoa pessoa, int id);
 	
 	List<Pessoa> getAll();
 }

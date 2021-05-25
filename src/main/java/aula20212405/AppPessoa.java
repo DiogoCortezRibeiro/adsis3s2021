@@ -1,13 +1,20 @@
 package aula20212405;
 
+import java.util.Scanner;
+
 public class AppPessoa {
 	public static void main(String[] args) {
-		Pessoa p1 = new Pessoa("Thalita", 25);
-		
+		Scanner sc = new Scanner(System.in);
 		PessoaRepository repo = new PessoaRepositoryPersistent();
 		
-		p1.setIdade(30);
+		System.out.print("Informe um id: ");
+		int id = sc.nextInt();
 		
-		repo.atualizar(p1, 3);
+		Pessoa p1 = new Pessoa("Thalita Martins", 22);
+		
+		repo.atualizar(p1, id);
+		
+		System.out.println("Passou");
+		
 	}
 }
