@@ -6,12 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import aepSegundoBimestre.Conexao;
 
 public class PessoaRepositoryPersistent extends Conexao implements PessoaRepository {
 	private Connection conexão;
 	
 	public PessoaRepositoryPersistent() {
-		conexão = abrirConexão();
+		conexão = abrirConexao();
 	}
 
 	@Override

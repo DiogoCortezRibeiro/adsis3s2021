@@ -6,11 +6,15 @@ import java.sql.PreparedStatement;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.swing.JOptionPane;
+
 public class AppTransacoes {
 	public static void main(String[] args) {
 		try 
 		{
-			Connection conexao = DriverManager.getConnection("jdbc:h2:~/transacoes", "sa", "");
+			Connection conexao = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/transacoes", "sa", "");
+			conexao.setAutoCommit(false); // TRANSAÇÃO FICA MANUAL A APRTIR DAQUI
+			
 			PreparedStatement psCreate = conexao.prepareStatement("create table if not exists LIVRO("
 					+ " ID CHAR(36) PRIMARY KEY,"
 					+ " TITULO VARCHAR(200) NOT NULL,"
@@ -22,14 +26,29 @@ public class AppTransacoes {
 
 			psCreate.execute();
 			psCreate.close();
+			conexao.commit();
+			for(int i = 0; i < 1000; i++) {
+				inserirUmLivro(conexao,
+						UUID.randomUUID().toString(),
+						"Java Como Programar" + System.nanoTime(),
+						true,
+						125.77,
+						new Date(),
+						120);
+			}
+			//JOptionPane.showMessageDialog(null, "Opa, mil inserts realizados mais ainda sem commit");
+			int opcao = JOptionPane.showConfirmDialog(null, "Deseja confirmar a transação?","Confime", JOptionPane.YES_NO_OPTION);
 			
-			inserirUmLivro(conexao,
-					UUID.randomUUID().toString(),
-					"Java Como Programar",
-					true,
-					125.77,
-					new Date(),
-					120);
+			if(opcao == JOptionPane.YES_OPTION)
+			{
+				conexao.commit();
+				System.out.println("Commit efetuado!");
+			}else if(opcao == JOptionPane.NO_OPTION)
+			{
+				conexao.rollback();
+				System.out.println("Rollback efetuado!");
+			}
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
