@@ -1,5 +1,7 @@
 package aula20210331.valueObjectsV2;
 
+import exercicioPessoaFisicaJuridica.ValueObject.CPF;
+
 public class AppCPF {
 	
 	public static void main(String[] args) {
